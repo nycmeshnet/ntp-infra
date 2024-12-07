@@ -30,16 +30,16 @@ variable "hostname" {
   description = "hostname of the lxc"
 }
 
-variable "system_image" {
+variable "mesh_proxmox_template_image" {
   type        = string
-  description = "system image for the lxc"
-  default     = "local:vztmpl/debian-12-standard_12.2-1_amd64.tar.zst"
+  description = "name of the template you have already setup in proxmox"
+  default     = "debian-cloud"
 }
 
 variable "mesh_local_user" {
   type        = string
   description = "local user username"
-  default     = "root"
+  default     = "debian"
 }
 
 variable "local_password" {
