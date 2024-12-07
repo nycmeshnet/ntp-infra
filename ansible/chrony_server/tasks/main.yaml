@@ -1,0 +1,72 @@
+- name: Install deps
+  ansible.builtin.apt:
+    lock_timeout: 240
+    update_cache: true
+    pkg:
+      - ca-certificates
+      - iptables-persistent
+      - bird2
+      - chrony
+
+- name: Import the Datadog Agent role from the Datadog collection
+  ansible.builtin.import_role:
+    name: datadog.dd.agent
+  vars:
+    datadog_api_key: "{{ DATADOG_API_KEY }}"
+    datadog_site: "{{ DATADOG_SITE }}"
+    datadog_config:
+      hostname: "{{ VM_HOSTNAME }}"
+
+- name: Reload datadog
+  ansible.builtin.systemd_service:
+    name: datadog-agent
+    state: restarted
+    enabled: true
+    daemon_reload: true
+
+- name: dummy0 interface
+  ansible.builtin.template:
+    src: ../templates/netplan_dummy0.yaml.j2
+    dest: /etc/netplan/dummy0.yaml
+    mode: "600"
+
+- name: dummy1 interface
+  ansible.builtin.template:
+    src: ../templates/netplan_dummy1.yaml.j2
+    dest: /etc/netplan/dummy1.yaml
+    mode: "600"
+
+- name: Iptables rules
+  ansible.builtin.template:
+    src: ../templates/iptables.j2
+    dest: /etc/iptables/rules.v4
+
+- name: Restore iptables rules
+  ansible.builtin.command:
+    cmd: "bash -c '/sbin/iptables-restore < /etc/iptables/rules.v4'"
+
+- name: Netplan apply
+  ansible.builtin.command:
+    cmd: "bash -c 'netplan apply && touch /tmp/netplan_applied'"
+    creates: /tmp/netplan_applied
+
+- name: Restart and enable iptables service
+  ansible.builtin.service:
+    name: netfilter-persistent
+    state: restarted
+    enabled: true
+
+- name: Bird config
+  ansible.builtin.template:
+    src: ../templates/bird.conf.j2
+    dest: /etc/bird/bird.conf
+    mode: "640"
+    owner: "bird"
+    group: "bird"
+
+- name: Reload bird
+  ansible.builtin.systemd_service:
+    name: bird
+    state: reloaded
+    enabled: true
+    daemon_reload: true
