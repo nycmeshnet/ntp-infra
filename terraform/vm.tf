@@ -21,7 +21,7 @@ resource "proxmox_vm_qemu" "ntp_server" {
       scsi0 {
         disk {
           backup  = false
-          size    = "20G"
+          size    = 20
           storage = var.proxmox_storage_location
         }
       }
