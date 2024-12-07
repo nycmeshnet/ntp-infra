@@ -8,7 +8,7 @@ resource "ansible_group" "ntp_mgt_group" {
     DATADOG_SITE                 = var.datadog_site
     VM_HOSTNAME                  = var.hostname
     ROUTER_ID                    = var.router_id
-    BIRD_NETWORK                 = bar.bird_network
+    BIRD_NETWORK                 = var.bird_network
     BIRD_NEIGHBOR                = var.bird_neighbor
     NTP_IP                       = var.ntp_ip
   }
