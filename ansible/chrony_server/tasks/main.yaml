@@ -29,6 +29,12 @@
     datadog_site: "{{ DATADOG_SITE }}"
     datadog_config:
       hostname: "{{ VM_HOSTNAME }}"
+      logs_enabled: true
+      datadog_additional_groups: "systemd-journal"
+      datadog_checks:
+        logs:
+          - type: journald
+            path: /bar/log/journal/
 
 - name: Reload datadog
   ansible.builtin.systemd_service:
