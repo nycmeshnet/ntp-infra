@@ -34,7 +34,7 @@
       datadog_checks:
         logs:
           - type: journald
-            path: /bar/log/journal/
+            path: /var/log/journal/
 
 - name: Reload datadog
   ansible.builtin.systemd_service:
