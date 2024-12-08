@@ -79,10 +79,10 @@
     src: ../files/sources.list
     dest: /etc/chrony/sources.d/configured_servers.list
 
-- name: Reload chrony
+- name: Restart chrony
   ansible.builtin.systemd_service:
     name: chrony
-    state: reloaded
+    state: restarted
     enabled: true
 
 - name: Bird config
