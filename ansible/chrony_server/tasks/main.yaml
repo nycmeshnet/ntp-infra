@@ -8,6 +8,19 @@
       - bird2
       - chrony
 
+- name: Allow restarting of bird
+  ansible.builtin.lineinfile:
+    path: /lib/systemd/system/bird.service
+    search_string: Restart=
+    line: "Restart=always"
+
+- name: Allow restarting of chrony
+  ansible.builtin.lineinfile:
+    path: /lib/systemd/system/chrony.service
+    insertafter: '\[Service\]'
+    search_string: Restart=
+    line: "Restart=always"
+
 - name: Import the Datadog Agent role from the Datadog collection
   ansible.builtin.import_role:
     name: datadog.dd.agent
@@ -55,6 +68,22 @@
     name: netfilter-persistent
     state: restarted
     enabled: true
+  
+- name: Chrony config
+  ansible.builtin.template:
+    src: ../templates/chrony.conf.j2
+    dest: /etc/chrony/chrony.conf
+
+- name: Chrony sources
+  ansible.builtin.copy:
+    src: ../files/sources.list
+    dest: /etc/chrony/sources.d/configured_servers.list
+
+- name: Reload chrony
+  ansible.builtin.systemd_service:
+    name: chrony
+    state: reloaded
+    enabled: true
 
 - name: Bird config
   ansible.builtin.template:
@@ -69,4 +98,3 @@
     name: bird
     state: reloaded
     enabled: true
-    daemon_reload: true
