@@ -32,9 +32,10 @@
       logs_enabled: true
     datadog_additional_groups: "systemd-journal"
     datadog_checks:
-      logs:
-        - type: journald
-          path: /var/log/journal/
+      journald:
+        logs:
+          - type: journald
+            path: /var/log/journal/
 
 - name: Reload datadog
   ansible.builtin.systemd_service:
