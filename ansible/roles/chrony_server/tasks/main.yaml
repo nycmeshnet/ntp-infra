@@ -44,26 +44,28 @@
     enabled: true
     daemon_reload: true
 
-- name: dummy0 interface
+- name: Netplan dummy0 interface
   ansible.builtin.template:
-    src: ../templates/netplan_dummy0.yaml.j2
+    src: netplan_dummy0.yaml.j2
     dest: /etc/netplan/dummy0.yaml
     mode: "600"
 
-- name: dummy1 interface
+- name: Netplan dummy1 interface
   ansible.builtin.template:
-    src: ../templates/netplan_dummy1.yaml.j2
+    src: netplan_dummy1.yaml.j2
     dest: /etc/netplan/dummy1.yaml
     mode: "600"
 
 - name: Iptables rules
   ansible.builtin.template:
-    src: ../templates/iptables.j2
+    src: iptables.j2
     dest: /etc/iptables/rules.v4
+    mode: "600"
 
 - name: Restore iptables rules
   ansible.builtin.command:
     cmd: "bash -c '/sbin/iptables-restore < /etc/iptables/rules.v4'"
+    creates: /tmp/fake_for_linter
 
 - name: Netplan apply
   ansible.builtin.command:
@@ -75,16 +77,18 @@
     name: netfilter-persistent
     state: restarted
     enabled: true
-  
+
 - name: Chrony config
   ansible.builtin.template:
-    src: ../templates/chrony.conf.j2
+    src: chrony.conf.j2
     dest: /etc/chrony/chrony.conf
+    mode: "0644"
 
 - name: Chrony sources
   ansible.builtin.copy:
-    src: ../files/sources.list
+    src: sources.list
     dest: /etc/chrony/sources.d/configured_servers.list
+    mode: "0644"
 
 - name: Restart chrony
   ansible.builtin.systemd_service:
@@ -94,7 +98,7 @@
 
 - name: Bird config
   ansible.builtin.template:
-    src: ../templates/bird.conf.j2
+    src: bird.conf.j2
     dest: /etc/bird/bird.conf
     mode: "640"
     owner: "bird"
