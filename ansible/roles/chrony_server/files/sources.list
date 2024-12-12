@@ -1,2 +1,4 @@
+# Managed by ansible
+
 # HE
 server clock.nyc.he.net iburst
