@@ -8,6 +8,7 @@ resource "proxmox_vm_qemu" "ntp_server" {
   cores                   = 1
   sockets                 = 1
   memory                  = 1024
+  onboot                  = true
   os_type                 = "cloud-init"
   agent                   = 1
   cloudinit_cdrom_storage = var.proxmox_storage_location
