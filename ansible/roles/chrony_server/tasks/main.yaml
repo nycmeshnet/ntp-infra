@@ -86,8 +86,8 @@
 
 - name: Chrony sources
   ansible.builtin.copy:
-    src: sources.list
-    dest: /etc/chrony/sources.d/configured_servers.list
+    src: configured_servers.sources
+    dest: /etc/chrony/sources.d/configured_servers.sources
     mode: "0644"
 
 - name: Restart chrony
