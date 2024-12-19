@@ -18,7 +18,7 @@
 # Allow NTP traffic
 -A INPUT -d {{ NTP_IP }}/32 -p udp -m udp --dport 123 -j ACCEPT
 -A INPUT -d {{ NTP_IP }}/32 -p tcp -m tcp --dport 123 -j ACCEPT
--A INPUT -d {{ NTP_IP }}/32 -p udp -m upd --dport 4460 -j ACCEPT
+-A INPUT -d {{ NTP_IP }}/32 -p udp -m udp --dport 4460 -j ACCEPT
 -A INPUT -d {{ NTP_IP }}/32 -p tcp -m tcp --dport 4460 -j ACCEPT
 -A INPUT -d {{ NTP_IP }}/32 -j DROP
 
