@@ -8,11 +8,11 @@
       - bird2
       - chrony
 
-- name: Allow restarting of bird
-  ansible.builtin.lineinfile:
-    path: /lib/systemd/system/bird.service
-    search_string: Restart=
-    line: "Restart=always"
+- name: Bird systemd unit
+  ansible.builtin.copy:
+    src: bird.service
+    dest: /lib/systemd/system/bird.service
+    mode: "0644"
 
 - name: Allow restarting of chrony
   ansible.builtin.lineinfile:

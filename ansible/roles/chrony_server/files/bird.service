@@ -1,0 +1,17 @@
+[Unit]
+Description=BIRD Internet Routing Daemon
+# Bind to and start after chrony so that the IP is only announced when chrony is running
+#After=network.target
+After=network.target,chrony.service
+BindsTo=chrony.service
+
+[Service]
+EnvironmentFile=/etc/bird/envvars
+ExecStartPre=/usr/lib/bird/prepare-environment
+ExecStartPre=/usr/sbin/bird -p
+ExecReload=/usr/sbin/birdc configure
+ExecStart=/usr/sbin/bird -f -u $BIRD_RUN_USER -g $BIRD_RUN_GROUP $BIRD_ARGS
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
