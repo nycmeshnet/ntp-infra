@@ -18,6 +18,10 @@
   vars:
     extra_resolvers: "9.9.9.9"
 
+- name: Import the support_account role from the nycmesh.common collection
+  ansible.builtin.import_role:
+    name: nycmesh.common.support_account
+
 - name: Bird systemd unit
   ansible.builtin.copy:
     src: bird.service
