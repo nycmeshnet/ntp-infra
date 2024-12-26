@@ -12,6 +12,10 @@
   ansible.builtin.import_role:
     name: nycmesh.common.ssh_config
 
+- name: Import the mesh_dns role from the nycmesh.common collection
+  ansible.builtin.import_role:
+    name: nycmesh.common.mesh_dns
+
 - name: Bird systemd unit
   ansible.builtin.copy:
     src: bird.service
