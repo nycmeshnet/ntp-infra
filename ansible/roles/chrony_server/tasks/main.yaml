@@ -8,6 +8,10 @@
       - bird2
       - chrony
 
+- name: Import the ssh_config role from the nycmesh.common collection
+  ansible.builtin.import_role:
+    name: nycmesh.common.ssh_config
+
 - name: Bird systemd unit
   ansible.builtin.copy:
     src: bird.service
