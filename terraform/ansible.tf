@@ -12,6 +12,7 @@ resource "ansible_group" "ntp_mgt_group" {
     BIRD_NEIGHBOR                = var.bird_neighbor
     NTP_IP                       = var.ntp_ip
     INTERNAL_NETWORK_RANGE       = var.internal_host_identifier
+    local_password               = var.local_password
   }
 }
 
