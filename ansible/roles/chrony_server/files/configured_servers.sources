@@ -1,4 +1,4 @@
 # Managed by ansible
 
-# HE
-server clock.nyc.he.net iburst
+# Cloudflare NTS
+server time.cloudflare.com nts iburst
