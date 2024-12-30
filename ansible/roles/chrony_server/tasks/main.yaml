@@ -67,17 +67,6 @@
 - name: Restore iptables rules
   ansible.builtin.command:
     cmd: "bash -c '/sbin/iptables-restore < /etc/iptables/rules.v4'"
-    creates: /tmp/fake_for_linter
-
-- name: Cleanup old netplan file
-  ansible.builtin.file:
-    path: /etc/netplan/dummy0.yaml
-    state: "absent"
-
-- name: Cleanup old netplan file
-  ansible.builtin.file:
-    path: /etc/netplan/dummy1.yaml
-    state: "absent"
 
 - name: Import the netplan_loopback role from the nycmesh.common collection
   ansible.builtin.import_role:
