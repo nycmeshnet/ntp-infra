@@ -58,18 +58,6 @@
     enabled: true
     daemon_reload: true
 
-- name: Netplan dummy0 interface
-  ansible.builtin.template:
-    src: netplan_dummy0.yaml.j2
-    dest: /etc/netplan/dummy0.yaml
-    mode: "600"
-
-- name: Netplan dummy1 interface
-  ansible.builtin.template:
-    src: netplan_dummy1.yaml.j2
-    dest: /etc/netplan/dummy1.yaml
-    mode: "600"
-
 - name: Iptables rules
   ansible.builtin.template:
     src: iptables.j2
@@ -81,10 +69,21 @@
     cmd: "bash -c '/sbin/iptables-restore < /etc/iptables/rules.v4'"
     creates: /tmp/fake_for_linter
 
-- name: Netplan apply
-  ansible.builtin.command:
-    cmd: "bash -c 'netplan apply && touch /tmp/netplan_applied'"
-    creates: /tmp/netplan_applied
+- name: Cleanup old netplan file
+  ansible.builtin.file:
+    path: /etc/netplan/dummy0.yaml
+    state: "absent"
+
+- name: Cleanup old netplan file
+  ansible.builtin.file:
+    path: /etc/netplan/dummy1.yaml
+    state: "absent"
+
+- name: Import the netplan_loopback role from the nycmesh.common collection
+  ansible.builtin.import_role:
+    name: nycmesh.common.netplan_loopback
+  vars:
+    netplan_loopback_ips: "{{ NTP_IP }};{{ ROUTER_ID }}"
 
 - name: Restart and enable iptables service
   ansible.builtin.service:

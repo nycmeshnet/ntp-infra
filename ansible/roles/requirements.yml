@@ -7,4 +7,4 @@ collections:
   - name: nycmesh.common
     source: git+https://github.com/nycmeshnet/nycmesh-ansible.git
     type: git
-    version: main
+    version: james/netplan_loopback_ip
