@@ -22,6 +22,12 @@
   ansible.builtin.import_role:
     name: nycmesh.common.support_account
 
+- name: Import the motd role from the nycmesh.common collection
+  ansible.builtin.import_role:
+    name: nycmesh.common.motd
+  vars:
+    github_repo: https://github.com/nycmeshnet/ntp-infra
+
 - name: Bird systemd unit
   ansible.builtin.copy:
     src: bird.service
