@@ -145,9 +145,6 @@ protocol ospf v2 {
 		interface "eth*" {
 			type broadcast;	# Detected by default
 			cost 10;		# Interface metric
-            neighbors {
-                {{ BIRD_NEIGHBOR }};
-            };
 		};
         interface "lo" {
             cost 10;

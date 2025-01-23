@@ -9,7 +9,6 @@ resource "ansible_group" "ntp_mgt_group" {
     VM_HOSTNAME                  = var.hostname
     ROUTER_ID                    = var.router_id
     BIRD_NETWORK                 = var.bird_network
-    BIRD_NEIGHBOR                = var.bird_neighbor
     NTP_IP                       = var.ntp_ip
     INTERNAL_NETWORK_RANGE       = var.internal_host_identifier
     local_password               = var.local_password

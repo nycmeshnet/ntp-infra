@@ -75,11 +75,6 @@ variable "router_id" {
   description = "IP to use for the router id"
 }
 
-variable "bird_neighbor" {
-  type        = string
-  description = "neighbor for the ospf router"
-}
-
 variable "bird_network" {
   type        = string
   description = "ospf network"
