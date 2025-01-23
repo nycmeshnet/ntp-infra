@@ -71,7 +71,7 @@
   ansible.builtin.import_role:
     name: nycmesh.common.netplan_loopback
   vars:
-    netplan_loopback_ips: "{{ NTP_IP }};{{ ROUTER_ID }}"
+    netplan_loopback_ips: "{{ NTP_IP }};{{ bird_router_id }}"
 
 - name: Restart and enable iptables service
   ansible.builtin.service:
