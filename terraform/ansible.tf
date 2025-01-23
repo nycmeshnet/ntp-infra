@@ -7,8 +7,8 @@ resource "ansible_group" "ntp_mgt_group" {
     DATADOG_API_KEY              = var.datadog_api_key
     DATADOG_SITE                 = var.datadog_site
     VM_HOSTNAME                  = var.hostname
-    ROUTER_ID                    = var.router_id
-    BIRD_NETWORK                 = var.bird_network
+    bird_router_id               = var.router_id
+    bird_network                 = var.bird_network
     NTP_IP                       = var.ntp_ip
     INTERNAL_NETWORK_RANGE       = var.internal_host_identifier
     local_password               = var.local_password
