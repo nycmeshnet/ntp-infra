@@ -100,3 +100,5 @@
 - name: Import the bird_basic role from the nycmesh.common collection
   ansible.builtin.import_role:
     name: nycmesh.common.bird2_basic
+  vars:
+    bird_binds_to_service: "chrony.service"
