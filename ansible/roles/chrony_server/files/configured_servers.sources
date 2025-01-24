@@ -1,0 +1,4 @@
+# Managed by ansible
+
+# Cloudflare NTS
+server time.cloudflare.com nts iburst
