@@ -2,3 +2,5 @@
 
 # Cloudflare NTS
 server time.cloudflare.com nts iburst
+server virginia.time.system76.com nts iburst
+server ohio.time.system76.com nts iburst
