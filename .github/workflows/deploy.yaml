@@ -11,6 +11,15 @@ on:
       - main
 
 jobs:
+  deploy_prod3:
+    name: Deploy prod3
+    uses: ./.github/workflows/deploy_ntp.yaml
+    with:
+      environment: prod3
+    secrets: inherit
+    needs: deploy_prod2
+    #if: github.ref == 'refs/heads/main'
+
   deploy_prod2:
     name: Deploy prod2
     uses: ./.github/workflows/deploy_ntp.yaml
@@ -19,11 +28,10 @@ jobs:
     secrets: inherit
     #if: github.ref == 'refs/heads/main'
 
-  deploy_prod3:
-    name: Deploy prod3
+  deploy_prod1:
+    name: Deploy prod1
     uses: ./.github/workflows/deploy_ntp.yaml
     with:
-      environment: prod3
+      environment: prod1
     secrets: inherit
-    needs: deploy_prod2
     #if: github.ref == 'refs/heads/main'
