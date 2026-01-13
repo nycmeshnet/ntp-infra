@@ -68,7 +68,7 @@ jobs:
         working-directory: ./terraform/
 
       - name: Setup WireGuard
-        uses: james-otten/nycmesh-vpn-action@main
+        uses: nycmeshnet/nycmesh-vpn-action@main
         with:
           config-name: ghntp
           private-key: ${{ secrets.WIREGUARD_PRIVATE_KEY }}
