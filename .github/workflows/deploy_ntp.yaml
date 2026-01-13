@@ -72,6 +72,7 @@ jobs:
         with:
           config-name: ghntp
           private-key: ${{ secrets.WIREGUARD_PRIVATE_KEY }}
+          server-preference: '10,3,11'
         # run:  |
         #   sudo apt-get update && sudo apt-get install -y wireguard
         #   echo "${{ secrets.WIREGUARD_PRIVATE_KEY }}" > privatekey
