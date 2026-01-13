@@ -1,0 +1,5 @@
+- name: NTP Servers
+  hosts: ntp_mgt
+  become: true
+  roles:
+    - role: chrony_server
