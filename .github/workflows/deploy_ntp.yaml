@@ -71,7 +71,6 @@ jobs:
         uses: james-otten/nycmesh-vpn-action@main
         with:
           config-name: ghntp
-        secrets: inherit
         # run:  |
         #   sudo apt-get update && sudo apt-get install -y wireguard
         #   echo "${{ secrets.WIREGUARD_PRIVATE_KEY }}" > privatekey
