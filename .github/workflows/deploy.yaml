@@ -3,8 +3,8 @@ permissions: read-all
 
 on:
   push:
-    branches:
-      - main
+    # branches:
+    #   - main
   workflow_dispatch:
     branches:
       - main
@@ -25,7 +25,7 @@ jobs:
       environment: prod2
     secrets: inherit
     # needs: deploy_prod3
-    if: github.ref == 'refs/heads/main'
+    #if: github.ref == 'refs/heads/main'
 
   deploy_prod1:
     name: Deploy prod1
